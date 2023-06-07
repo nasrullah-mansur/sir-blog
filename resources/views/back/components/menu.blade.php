@@ -15,6 +15,10 @@
             <li class="{{ Route::is('blog.sidebar') ? 'active' : '' }}">
               <a class="menu-item" href="{{ route('blog.sidebar') }}">Blog Sidebar</a>
           </li>
+
+          <li class=" {{ Route::is('comment.index') ? 'active' : ''}}">
+            <a class="menu-item" href="{{route('comment.index')}}">Comments</span></a>
+        </li>
             
           </ul>
         </li>
@@ -28,7 +32,9 @@
             <li class="{{ Route::is('up.blog.category.*') ? 'active' : '' }}">
               <a class="menu-item" href="{{ route('up.blog.category.index') }}">Categories</a>
             </li>
-            
+            <li class=" {{ Route::is('comment.upcoming.*') ? 'active' : ''}}">
+              <a class="menu-item" href="{{route('comment.upcoming.index')}}">Comments</span></a>
+          </li>
           </ul>
         </li>
 
@@ -111,6 +117,8 @@
         <li class=" nav-item {{ Route::is('custom.page.*') ? 'active' : ''}}">
             <a href="{{route('custom.page.index')}}"><i class="ft-box"></i><span class="menu-title">Custom Pages</span></a>
         </li>
+        
+        
         
       </ul>
     </div>

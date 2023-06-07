@@ -11,6 +11,9 @@ use App\Http\Controllers\Back\BlogCategoryController;
 use App\Http\Controllers\Back\CustomPageController;
 use App\Http\Controllers\Back\VideoGalleryController;
 use App\Http\Controllers\BlogSidebarController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\CommentCustomController;
+use App\Http\Controllers\CommentUpcomingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ContactSectionController;
 use App\Http\Controllers\CourseController;
@@ -64,6 +67,21 @@ Route::middleware(['auth'])->group(function () {
             Route::get('blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
             Route::post('blog/update/{id}', [BlogController::class, 'update'])->name('blog.update');
             Route::post('blog/delete', [BlogController::class, 'delete'])->name('blog.delete');
+
+            // Comment;
+            Route::get('comment', [CommentController::class, 'index'])->name('comment.index');
+            Route::get('comment/status/{id}', [CommentController::class, 'status'])->name('comment.status');
+            Route::post('comment/delete', [CommentController::class, 'delete'])->name('comment.delete');
+
+            // Comment upcoming courses;
+            Route::get('comment/upcoming', [CommentUpcomingController::class, 'index'])->name('comment.upcoming.index');
+            Route::get('comment/upcoming/status/{id}', [CommentUpcomingController::class, 'status'])->name('comment.upcoming.status');
+            Route::post('comment/upcoming/delete', [CommentUpcomingController::class, 'delete'])->name('comment.upcoming.delete');
+
+            // Comment upcoming courses;
+            Route::get('comment/custom', [CommentCustomController::class, 'index'])->name('comment.custom.index');
+            Route::get('comment/custom/status/{id}', [CommentCustomController::class, 'status'])->name('comment.custom.status');
+            Route::post('comment/custom/delete', [CommentCustomController::class, 'delete'])->name('comment.custom.delete');
             
             // Blogs;
             Route::get('up-blog', [UpcomingBlogController::class, 'index'])->name('up.blog.index');

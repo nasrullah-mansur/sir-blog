@@ -52,4 +52,52 @@ $(document).ready(function () {
             ],
         });
     }
+
+
+
+    // Comment;
+    if ($(".comment-section").length > 0) {
+        let replyIcon = $('.comment ul li .contant h4 a');
+        let commentForm = document.getElementById('comment-form');
+        let replyText = document.getElementById('reply-text');
+
+        replyIcon.click(function(e) {
+            e.preventDefault();
+            commentForm.scrollIntoView({behavior: "smooth"});
+            console.log($(this).attr('data-pid'));
+
+            $('#pid').val($(this).attr('data-pid'));
+            checkPid();
+        });
+
+        $('.comment-title a').on('click', function(e) {
+            e.preventDefault();
+            $('#pid').val(0);
+            checkPid();
+        });
+
+        function checkPid() {
+            let pidVal = $('#pid').val();
+
+            if(pidVal == 0) {
+                $('#reply-text').text('Leave a comment');
+                $('#close-reply').hide();
+            } else {
+                $('#reply-text').text('Leave a reply');
+                $('#close-reply').show();
+            }
+
+        }
+
+        checkPid();
+
+    }
+
+
+
+
+
+
+
+
 });

@@ -11,6 +11,8 @@ use App\Models\CustomPage;
 use App\Models\BlogSidebar;
 use App\Models\BlogTag;
 use App\Models\Chamber;
+use App\Models\Comment;
+use App\Models\CommentUpcoming;
 use App\Models\Contact;
 use App\Models\Day;
 use App\Models\ImageGallery;
@@ -112,7 +114,13 @@ class FrontController extends Controller
 
         $sidebar = BlogSidebar::first();
 
-        return view('front.blog.single', compact('blog', 'previous_blog', 'next_blog', 'other_blogs', 'categories', 'sidebar'));
+        $comments = Comment::with('replies')
+        ->where('blog_id', $blog->id)
+        ->where('status', STATUS_ACTIVE)
+        ->where('p_id', '0')
+        ->get();
+
+        return view('front.blog.single', compact('blog', 'previous_blog', 'next_blog', 'other_blogs', 'categories', 'sidebar', 'comments'));
     }
 
     public function blog_by_search_get(Request $request)
@@ -170,8 +178,13 @@ class FrontController extends Controller
         $categories = UpcomingBlogCategory::with('blogs')->get();
 
         $sidebar = BlogSidebar::first();
+        $comments = CommentUpcoming::with('replies')
+        ->where('blog_id', $blog->id)
+        ->where('status', STATUS_ACTIVE)
+        ->where('p_id', '0')
+        ->get();
 
-        return view('front.blog_upcoming.single', compact('blog', 'previous_blog', 'next_blog', 'other_blogs', 'categories', 'sidebar'));
+        return view('front.blog_upcoming.single', compact('comments', 'blog', 'previous_blog', 'next_blog', 'other_blogs', 'categories', 'sidebar'));
     }
 
     public function up_blog_by_category($slug)

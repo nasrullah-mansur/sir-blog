@@ -1,11 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\SubscriberController;
 use App\Http\Controllers\Front\FrontController;
 use App\Http\Controllers\Back\VideoGalleryController;
-use App\Http\Controllers\CourseController;
+use App\Http\Controllers\CommentCustomController;
+use App\Http\Controllers\CommentUpcomingController;
 
 Route::get('/', [FrontController::class, 'index'])->name('welcome');
 
@@ -17,6 +20,12 @@ Route::get('/blogs/category/{slug}', [FrontController::class, 'blog_by_category'
 Route::get('/blogs/tag/{slug}', [FrontController::class, 'blog_by_tag'])->name('blog.by.tag');
 Route::post('blog/by/search', [FrontController::class, 'blog_by_search_get'])->name('blog.by.search.get');
 Route::get('blog/by/search/{key}', [FrontController::class, 'blog_by_search_set'])->name('blog.by.search.set');
+
+
+// Comment;
+Route::post('comment/store', [CommentController::class, 'store'])->name('comment.store');
+Route::post('comment/upcoming/store', [CommentUpcomingController::class, 'store'])->name('comment.upcoming.store');
+Route::post('comment/custom/store', [CommentCustomController::class, 'store'])->name('comment.custom.store');
 
 // Upcoming Blog;
 Route::get('/upcoming-blogs', [FrontController::class, 'up_blogs'])->name('front.up.blog');
