@@ -98,6 +98,100 @@
               </div>
                             
             </div>
+
+
+            <div style="border-top: 2px solid #444; backgorund-color: red; width: 100%; margin-top: 100px; margin-bottom: 30px;">
+              <h2 class="pt-2">Sidebar Setting</h2>
+            </div>
+
+            <div class="form-body">
+              <div class="form-group">
+                <label for="name">Category Section</label>
+                <div class="row skin skin-square">
+
+                  <fieldset class="d-block w-100 ml-1">
+                    <input checked type="radio" name="category" value="on" id="input-radio-11">
+                    <label for="input-radio-11">Enable</label>
+                  </fieldset>
+
+                  <fieldset class="d-block w-100 ml-1">
+                    <input type="radio" name="category" value="off" id="input-radio-12">
+                    <label for="input-radio-12">Disable</label>
+                  </fieldset>
+
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="name">Comment Section</label>
+                <div class="row skin skin-square">
+
+                  <fieldset class="d-block w-100 ml-1">
+                    <input checked type="radio" name="comment" value="on" id="input-radio-21">
+                    <label for="input-radio-21">Enable</label>
+                  </fieldset>
+
+
+
+                  <fieldset class="d-block w-100 ml-1">
+                    <input type="radio" name="comment" value="off" id="input-radio-22">
+                    <label for="input-radio-22">Disable</label>
+                  </fieldset>
+
+                </div>
+              </div>
+
+
+
+              <div class="form-group">
+                <label for="name">Mini Course Section</label>
+                <div class="row skin skin-square">
+
+                  <fieldset class="d-block w-100 ml-1">
+                    <input type="radio" name="mini_course" value="on" id="input-radio-31">
+                    <label for="input-radio-31">Enable</label>
+                  </fieldset>
+                  <fieldset class="d-block w-100 ml-1">
+                    <input checked type="radio" name="mini_course" value="off" id="input-radio-32">
+                    <label for="input-radio-32">Disable</label>
+                  </fieldset>
+                  
+                </div>
+                <div class="form-group">
+                  <input type="text" id="name" class="form-control square " placeholder="Mini Course Google Drive Link" name="mini_course_link">
+                </div>
+              </div>
+
+
+              <div class="form-group">
+                <label for="name">Advertizement Section</label>
+                <div class="row skin skin-square">
+
+                  <fieldset class="d-block w-100 ml-1">
+                    <input type="radio" name="advertizement" value="on" id="input-radio-41">
+                    <label for="input-radio-41">Enable</label>
+                  </fieldset>
+                  <fieldset class="d-block w-100 ml-1">
+                    <input checked type="radio" name="advertizement" value="off" id="input-radio-42">
+                    <label for="input-radio-42">Disable</label>
+                  </fieldset>
+                  
+                </div>
+                <div class="form-group">
+                  <select class="select2 form-control" name="advertizement_id">
+                    @foreach (advertizement() as $advertizement)
+                    <option value="{{ $advertizement->id }}">{{ $advertizement->title }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+
+
+                            
+            </div>
+
+
             <div class="form-actions">
                 <button type="submit" class="btn btn-primary" style="margin-right: 5px; ">
                   <i class="fa fa-check-square-o"></i> Save

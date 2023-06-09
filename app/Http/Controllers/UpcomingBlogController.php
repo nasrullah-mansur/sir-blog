@@ -6,6 +6,7 @@ use Illuminate\Support\Str;
 use App\Models\UpcomingBlog;
 use Illuminate\Http\Request;
 use App\DataTables\UpcomingBlogDataTable;
+use App\Models\Sidebar;
 use App\Models\UpcomingBlogCategory;
 
 class UpcomingBlogController extends Controller
@@ -50,6 +51,17 @@ class UpcomingBlogController extends Controller
 
         $blog->save();
 
+        $sidebar = new Sidebar();
+        $sidebar->category = $request->category;
+        $sidebar->comment = $request->comment;
+        $sidebar->mini_course = $request->mini_course;
+        $sidebar->mini_course_link = $request->mini_course_link;
+        $sidebar->advertizement = $request->advertizement;
+        $sidebar->advertizement_id = $request->advertizement_id;
+
+        $sidebar->page_id = "up_" . $blog->id;
+        $sidebar->save();
+
 
         return redirect()->route('up.blog.index')->with('success', 'Blog added successfully');
     }
@@ -93,6 +105,18 @@ class UpcomingBlogController extends Controller
 
         $blog->save();
 
+        $sidebar = Sidebar::where('page_id', "up_" . $blog->id)->firstOrFail();
+        $sidebar->category = $request->category;
+        $sidebar->comment = $request->comment;
+        $sidebar->mini_course = $request->mini_course;
+        $sidebar->mini_course_link = $request->mini_course_link;
+        $sidebar->advertizement = $request->advertizement;
+        $sidebar->advertizement_id = $request->advertizement_id;
+
+        $sidebar->page_id = "up_" . $blog->id;
+        $sidebar->save();
+
+
         return redirect()->route('up.blog.index')->with('success', 'Blog updated successfully');
     }
 
@@ -100,6 +124,9 @@ class UpcomingBlogController extends Controller
     {
         $blog = UpcomingBlog::where('id', $request->id)->firstOrFail();
         removeImage($blog->image);
+
+        $sidebar = Sidebar::where('page_id', "up_" . $blog->id)->firstOrFail();
+        $sidebar->delete();
         $blog->delete();
 
         return redirect()->route('up.blog.index')->with('success', 'Blog removed successfully');

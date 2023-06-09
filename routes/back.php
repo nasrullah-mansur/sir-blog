@@ -1,28 +1,29 @@
 <?php
 
-use App\Http\Controllers\AdvertizementController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\SocialController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\SidebarController;
 use App\Http\Controllers\Back\BlogController;
 use App\Http\Controllers\Back\MenuController;
-use App\Http\Controllers\Back\BlogTagController;
-use App\Http\Controllers\Back\AppearanceController;
-use App\Http\Controllers\Back\BannerController;
-use App\Http\Controllers\Back\BlogCategoryController;
-use App\Http\Controllers\Back\CustomPageController;
-use App\Http\Controllers\Back\VideoGalleryController;
-use App\Http\Controllers\BlogSidebarController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\CommentCustomController;
-use App\Http\Controllers\CommentUpcomingController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ContactSectionController;
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\SpecialtiesController;
 use App\Http\Controllers\SubscriberController;
-use App\Http\Controllers\SocialController;
-
-use App\Http\Controllers\UpcomingBlogCategoryController;
+use App\Http\Controllers\Back\BannerController;
+use App\Http\Controllers\BlogSidebarController;
+use App\Http\Controllers\SpecialtiesController;
+use App\Http\Controllers\Back\BlogTagController;
 use App\Http\Controllers\UpcomingBlogController;
+use App\Http\Controllers\AdvertizementController;
+use App\Http\Controllers\CommentCustomController;
+use App\Http\Controllers\ContactSectionController;
+use App\Http\Controllers\Back\AppearanceController;
+use App\Http\Controllers\Back\CustomPageController;
+use App\Http\Controllers\CommentUpcomingController;
+
+use App\Http\Controllers\Back\BlogCategoryController;
+use App\Http\Controllers\Back\VideoGalleryController;
+use App\Http\Controllers\UpcomingBlogCategoryController;
 
 Route::middleware(['auth'])->group(function () {
     // Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -198,6 +199,10 @@ Route::middleware(['auth'])->group(function () {
             Route::get('custom-pages/edit/{id}', [CustomPageController::class, 'edit'])->name('custom.page.edit');
             Route::post('custom-pages/update/{id}', [CustomPageController::class, 'update'])->name('custom.page.update');
             Route::post('custom-pages/delete', [CustomPageController::class, 'delete'])->name('custom.page.delete');
+
+
+            Route::post('sidebar/store', [SidebarController::class, 'store'])->name('sidebar.store');
+            Route::post('sidebar/store/{id}', [SidebarController::class, 'update'])->name('sidebar.update');
             
         });
     });

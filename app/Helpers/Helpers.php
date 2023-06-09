@@ -201,3 +201,11 @@ function socials()
 {
     return $socials = Social::all();
 }
+
+
+function advertizement()
+{
+    $advertizement = Advertizement::orderBy('created_at','DESC')->get();
+
+    return $advertizement;
+}

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Back;
 
+use App\Models\Sidebar;
 use App\Models\CustomPage;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -43,6 +44,17 @@ class CustomPageController extends Controller
 
         $page->save();
 
+        $sidebar = new Sidebar();
+        $sidebar->category = $request->category;
+        $sidebar->comment = $request->comment;
+        $sidebar->mini_course = $request->mini_course;
+        $sidebar->mini_course_link = $request->mini_course_link;
+        $sidebar->advertizement = $request->advertizement;
+        $sidebar->advertizement_id = $request->advertizement_id;
+
+        $sidebar->page_id = "page_" . $page->id;
+        $sidebar->save();
+
         return redirect()->route('custom.page.index')->with('success', 'Custom page added successfully');
     }
 
@@ -76,6 +88,17 @@ class CustomPageController extends Controller
 
         $page->save();
 
+        $sidebar = Sidebar::where('page_id', "page_" . $page->id)->firstOrFail();
+        $sidebar->category = $request->category;
+        $sidebar->comment = $request->comment;
+        $sidebar->mini_course = $request->mini_course;
+        $sidebar->mini_course_link = $request->mini_course_link;
+        $sidebar->advertizement = $request->advertizement;
+        $sidebar->advertizement_id = $request->advertizement_id;
+
+        $sidebar->page_id = "page_" . $page->id;
+        $sidebar->save();
+
         return redirect()->route('custom.page.index')->with('success', 'Custom page updated successfully');
     }
 
@@ -83,6 +106,8 @@ class CustomPageController extends Controller
     {
         $page = CustomPage::where('id', $request->id)->firstOrFail();
         removeImage($page->image);
+        $sidebar = Sidebar::where('page_id', "page_" . $page->id)->firstOrFail();
+        $sidebar->delete();
         $page->delete();
     }
 }
